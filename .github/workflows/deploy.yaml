@@ -24,5 +24,6 @@ jobs:
         uses: azure/container-apps-deploy-action@v1
         with:
           appSourcePath: ${{ github.workspace }}
+          resourceGroup: Meet
           acrName: cidemo
           dockerfilePath: Dockerfile
