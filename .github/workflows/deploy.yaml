@@ -20,10 +20,17 @@ jobs:
         with:
           creds: ${{secrets.AZURE_CREDENTIALS}}
 
-      - name: Build and deploy Container App
-        uses: azure/container-apps-deploy-action@v1
+      - name: Build Docker image
+        run: |
+          docker build -t gad:latest .
+
+      - name: Tag & Push to ACR
+        run: |
+          docker tag gad:latest cidemo.azurecr.io/gad:latest
+          docker push cidemo.azurecr.io/gad:latest
+
+      - name: Deploy to Azure Container Apps
+        uses: azure/cli@v2
         with:
-          appSourcePath: ${{ github.workspace }}
-          resourceGroup: Meet
-          acrName: cidemo
-          dockerfilePath: Dockerfile
+          inlineScript: |
+            az containerapp update --name gad --resource-group Meet --image cidemo.azurecr.io/gad:latest

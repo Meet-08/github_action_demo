@@ -1,4 +1,4 @@
-FROM gradle:9.0-jdk17 AS build
+FROM gradle:8.0 AS build
 WORKDIR /app
 
 COPY gradle gradle
@@ -15,6 +15,6 @@ WORKDIR /app
 
 COPY --from=build /app/build/libs/*.jar app.jar
 
-EXPOSE 8080
+EXPOSE 80
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
