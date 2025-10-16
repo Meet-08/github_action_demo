@@ -27,7 +27,7 @@ jobs:
       - name: Log in to Azure Container Registry
         run: |
           az acr login --name cidemo
-          
+
       - name: Tag & Push to ACR
         run: |
           docker tag gad:latest cidemo.azurecr.io/gad:latest
@@ -37,4 +37,4 @@ jobs:
         uses: azure/cli@v2
         with:
           inlineScript: |
-            az containerapp update --name gad --resource-group Meet --image cidemo.azurecr.io/gad:latest
+            az containerapp update --name ci-demo-container --resource-group Meet --image cidemo.azurecr.io/gad:latest
