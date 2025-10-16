@@ -4,6 +4,9 @@ WORKDIR /app
 COPY gradle gradle
 COPY gradlew .
 
+RUN chmod +x gradlew \
+ && sed -i 's/\r$//' gradlew || true
+
 RUN ./gradlew --no-daemon help || true
 
 COPY . .
