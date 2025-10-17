@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class UserService {
 
-    List<User> userRepo = new ArrayList<>();
+    private final List<User> userRepo = new ArrayList<>();
 
     UserService() {
         for (int i = 1; i <= 10; i++)
